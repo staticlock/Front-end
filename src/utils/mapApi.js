@@ -6,8 +6,12 @@
 // Nominatim 搜索API (OpenStreetMap 提供的免费地理编码服务)
 const NOMINATIM_BASE = "https://nominatim.openstreetmap.org";
 
-// OSRM 路线规划API (免费开源路线服务)
-const OSRM_BASE = "https://router.project-osrm.org";
+// OSRM 各出行方式对应的公开服务端点（各自独立支持对应出行方式）
+const OSRM_PROFILES = {
+  driving: 'https://routing.openstreetmap.de/routed-car/route/v1/driving',
+  walking: 'https://routing.openstreetmap.de/routed-foot/route/v1/foot',
+  cycling: 'https://routing.openstreetmap.de/routed-bike/route/v1/bike'
+}
 
 /**
  * 搜索地点
@@ -97,7 +101,8 @@ export async function reverseGeocode(lat, lng) {
 export async function getRoute(start, end, profile = "driving") {
   try {
     const coordinates = `${start[0]},${start[1]};${end[0]},${end[1]}`;
-    const url = `${OSRM_BASE}/route/v1/${profile}/${coordinates}?overview=full&geometries=geojson&steps=true`;
+    const baseUrl = OSRM_PROFILES[profile] || OSRM_PROFILES.driving;
+    const url = `${baseUrl}/${coordinates}?overview=full&geometries=geojson&steps=true`;
 
     const response = await fetch(url);
     if (!response.ok) throw new Error("路线请求失败");

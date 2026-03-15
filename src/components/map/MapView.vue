@@ -101,7 +101,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import {
   LMap,
   LTileLayer,
@@ -186,9 +186,10 @@ const routeOptions = {
   }
 }
 
-// 地图准备就绪
-const onMapReady = () => {
-  console.log('地图已加载')
+// 地图准备就绪后自动定位
+const onMapReady = async () => {
+  await nextTick()
+  getCurrentLocation().catch(() => {})
 }
 
 // 获取当前位置
@@ -207,9 +208,19 @@ const getCurrentLocation = () => {
         locating.value = false
         const { latitude, longitude } = position.coords
         currentLocation.value = [latitude, longitude]
-        center.value = [latitude, longitude]
-        zoom.value = 15
         emit('location-found', { lat: latitude, lng: longitude })
+        // 使用 Leaflet 实例跳转，确保地图正确移动
+        const jump = async () => {
+          await nextTick()
+          const leafletMap = mapRef.value?.leafletObject
+          if (leafletMap) {
+            leafletMap.flyTo([latitude, longitude], 15, { duration: 1.2 })
+          } else {
+            center.value = [latitude, longitude]
+            zoom.value = 15
+          }
+        }
+        jump()
         resolve({ lat: latitude, lng: longitude })
       },
       (error) => {
@@ -263,8 +274,14 @@ const clearDistance = () => {
 
 // 跳转到指定位置
 const flyTo = (lat, lng, zoomLevel = 16) => {
-  center.value = [lat, lng]
-  zoom.value = zoomLevel
+  // 优先使用 Leaflet 实例的 flyTo，动画更流畅且更可靠
+  const leafletMap = mapRef.value?.leafletObject
+  if (leafletMap) {
+    leafletMap.flyTo([lat, lng], zoomLevel, { duration: 1.2 })
+  } else {
+    center.value = [lat, lng]
+    zoom.value = zoomLevel
+  }
 }
 
 // 监听搜索结果
@@ -317,18 +334,14 @@ defineExpose({
   currentLocation
 })
 
-// 初始化
+// 初始化 - 修复 Leaflet 默认图标问题
 onMounted(() => {
-  // 修复 Leaflet 默认图标问题
   delete L.Icon.Default.prototype._getIconUrl
   L.Icon.Default.mergeOptions({
     iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
     iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png'
   })
-
-  // 页面加载后自动定位
-  getCurrentLocation().catch(() => {})
 })
 </script>
 
