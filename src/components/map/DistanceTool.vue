@@ -238,4 +238,48 @@ defineExpose({
   white-space: nowrap;
   z-index: 100;
 }
+
+/* ====== 手机端：面板从底部弹出 ====== */
+@media (max-width: 768px) {
+  .distance-tool {
+    position: static;
+  }
+
+  .measure-result {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.2);
+    z-index: 2000 !important;
+  }
+
+  .result-header {
+    position: relative;
+    padding-top: 20px;
+  }
+
+  .result-header::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: #ccc;
+    border-radius: 2px;
+  }
+
+  .measure-tip {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 110px !important;
+    right: 70px !important;
+    left: auto !important;
+  }
+}
 </style>

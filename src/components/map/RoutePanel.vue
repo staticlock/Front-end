@@ -427,4 +427,60 @@ defineExpose({
   font-size: 13px;
   border-top: 1px solid #ffe0b2;
 }
+
+/* ====== 手机端：面板从底部弹出 ====== */
+@media (max-width: 768px) {
+  .route-panel {
+    position: static;
+  }
+
+  .panel-content {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.2);
+    max-height: 75vh;
+    overflow-y: auto;
+    z-index: 2000 !important;
+  }
+
+  .panel-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    /* 顶部拖拽指示条 */
+    padding-top: 20px;
+    background-image: linear-gradient(#f5f5f5, #f5f5f5);
+  }
+
+  .panel-header::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: #ccc;
+    border-radius: 2px;
+  }
+
+  .travel-modes {
+    gap: 10px;
+  }
+
+  .mode-btn {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+
+  .plan-btn {
+    padding: 14px;
+    font-size: 16px;
+  }
+}
 </style>

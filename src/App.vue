@@ -314,40 +314,6 @@ const handleClearRoute = () => {
     margin: 0;
   }
 
-  /* 面板从底部弹出，全宽 */
-  .side-controls :deep(.panel-content) {
-    position: fixed !important;
-    top: auto !important;
-    bottom: 0 !important;
-    right: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    border-radius: 20px 20px 0 0;
-    box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-
-  .side-controls :deep(.measure-result) {
-    position: fixed !important;
-    top: auto !important;
-    bottom: 0 !important;
-    right: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    border-radius: 20px 20px 0 0;
-    box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
-  }
-
-  .side-controls :deep(.measure-tip) {
-    position: fixed !important;
-    top: auto !important;
-    bottom: 80px !important;
-    right: 70px !important;
-    left: auto !important;
-    font-size: 13px;
-  }
-
   /* 缩放控件固定在右下角，与工具按钮不重叠 */
   :deep(.leaflet-bottom.leaflet-right) {
     bottom: 16px !important;
@@ -365,13 +331,6 @@ const handleClearRoute = () => {
     left: 12px;
     right: 12px;
     max-height: 50vh;
-  }
-
-  /* 底部版权信息 */
-  .bottom-info {
-    bottom: 8px;
-    font-size: 11px;
-    padding: 6px 14px;
   }
 
   .separator { margin: 0 6px; }
