@@ -137,12 +137,6 @@ const handleClearRoute = () => {
         @route-planned="handleRoutePlanned" @clear-route="handleClearRoute" />
     </div>
 
-    <!-- 底部信息 -->
-    <div class="bottom-info">
-      <span>🗺️ Vue 地图应用</span>
-      <span class="separator">|</span>
-      <span>数据来源: OpenStreetMap</span>
-    </div>
   </div>
 </template>
 
@@ -150,6 +144,7 @@ const handleClearRoute = () => {
 .app-container {
   width: 100%;
   height: 100%;
+  height: 100dvh;
   position: relative;
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -288,11 +283,11 @@ const handleClearRoute = () => {
     border-radius: 20px;
   }
 
-  /* 工具按钮：移到右下角，垂直排列，圆形图标按钮 */
+  /* 工具按钮：移到右下角缩放控件上方，垂直排列，圆形图标按钮 */
   .side-controls {
     top: auto;
     right: 12px;
-    bottom: 80px;
+    bottom: 100px; /* 留出缩放控件(~70px) + 间距 */
     flex-direction: column;
     gap: 10px;
     align-items: flex-end;
@@ -353,6 +348,16 @@ const handleClearRoute = () => {
     font-size: 13px;
   }
 
+  /* 缩放控件固定在右下角，与工具按钮不重叠 */
+  :deep(.leaflet-bottom.leaflet-right) {
+    bottom: 16px !important;
+    right: 12px !important;
+  }
+
+  :deep(.leaflet-control-zoom) {
+    margin: 0 !important;
+  }
+
   /* 搜索结果下拉框宽度修正 */
   .top-controls :deep(.search-results) {
     position: fixed;
@@ -382,7 +387,7 @@ const handleClearRoute = () => {
 
   .side-controls {
     right: 10px;
-    bottom: 72px;
+    bottom: 96px;
   }
 
   .side-controls :deep(.location-btn),
@@ -390,12 +395,6 @@ const handleClearRoute = () => {
   .side-controls :deep(.route-btn) {
     width: 44px;
     height: 44px;
-  }
-
-  .bottom-info {
-    bottom: 6px;
-    font-size: 10px;
-    padding: 5px 12px;
   }
 }
 </style>

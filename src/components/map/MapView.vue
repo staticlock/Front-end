@@ -356,7 +356,14 @@ onMounted(() => {
 .map-container {
   width: 100%;
   height: 100%;
+  height: 100dvh;
   position: relative;
+}
+
+/* 确保 Leaflet 地图容器撑满 */
+:deep(.leaflet-container) {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .popup-content {
