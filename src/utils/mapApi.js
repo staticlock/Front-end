@@ -8,10 +8,10 @@ const NOMINATIM_BASE = "https://nominatim.openstreetmap.org";
 
 // OSRM 各出行方式对应的公开服务端点（各自独立支持对应出行方式）
 const OSRM_PROFILES = {
-  driving: 'https://routing.openstreetmap.de/routed-car/route/v1/driving',
-  walking: 'https://routing.openstreetmap.de/routed-foot/route/v1/foot',
-  cycling: 'https://routing.openstreetmap.de/routed-bike/route/v1/bike'
-}
+  driving: "https://routing.openstreetmap.de/routed-car/route/v1/driving",
+  walking: "https://routing.openstreetmap.de/routed-foot/route/v1/foot",
+  cycling: "https://routing.openstreetmap.de/routed-bike/route/v1/bike",
+};
 
 /**
  * 搜索地点

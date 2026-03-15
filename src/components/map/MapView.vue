@@ -1,15 +1,7 @@
 <template>
   <div class="map-container">
-    <l-map
-      ref="mapRef"
-      v-model:zoom="zoom"
-      v-model:center="center"
-      :use-global-leaflet="false"
-      :options="{ zoomControl: false }"
-      style="width:100%;height:100%"
-      @click="handleMapClick"
-      @ready="onMapReady"
-    >
+    <l-map ref="mapRef" v-model:zoom="zoom" v-model:center="center" :use-global-leaflet="false"
+      :options="{ zoomControl: false }" style="width:100%;height:100%" @click="handleMapClick" @ready="onMapReady">
       <!-- 地图图层 -->
       <l-tile-layer :url="tileUrl" :attribution="attribution" layer-type="base" name="OpenStreetMap" />
 
@@ -200,7 +192,7 @@ const onMapReady = async () => {
   if (leafletMap) {
     leafletMap.invalidateSize()
   }
-  getCurrentLocation().catch(() => {})
+  getCurrentLocation().catch(() => { })
 }
 
 // 获取当前位置
@@ -254,7 +246,7 @@ const getCurrentLocation = () => {
 // 重试定位
 const retryLocate = () => {
   permissionDenied.value = false
-  getCurrentLocation().catch(() => {})
+  getCurrentLocation().catch(() => { })
 }
 
 // 地图点击处理
@@ -366,8 +358,10 @@ onMounted(() => {
 <style scoped>
 .map-container {
   width: 100%;
-  height: 100vh; /* 兼容旧版浏览器 */
-  height: 100dvh; /* 现代手机浏览器动态视口 */
+  height: 100vh;
+  /* 兼容旧版浏览器 */
+  height: 100dvh;
+  /* 现代手机浏览器动态视口 */
   position: relative;
 }
 
@@ -435,7 +429,7 @@ onMounted(() => {
   margin-bottom: 10px;
 }
 
-.permission-dialog > p {
+.permission-dialog>p {
   font-size: 14px;
   color: #666;
   line-height: 1.6;
@@ -543,7 +537,9 @@ onMounted(() => {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* 过渡动画 */

@@ -115,11 +115,7 @@ const handleClearRoute = () => {
     <div class="top-controls">
       <SearchBox @select="handleSearchSelect" @clear="handleSearchClear" />
       <transition name="slide-in">
-        <button
-          v-if="searchResult"
-          class="navigate-btn"
-          @click="handleNavigateTo"
-        >
+        <button v-if="searchResult" class="navigate-btn" @click="handleNavigateTo">
           🚀 到这去
         </button>
       </transition>
@@ -133,8 +129,7 @@ const handleClearRoute = () => {
         @clear="handleMeasureClear" />
 
       <RoutePanel ref="routePanelRef" :current-location="currentLocationArray" :map-click-coord="mapClickCoord"
-        @open="handleMeasureClear"
-        @route-planned="handleRoutePlanned" @clear-route="handleClearRoute" />
+        @open="handleMeasureClear" @route-planned="handleRoutePlanned" @clear-route="handleClearRoute" />
     </div>
 
   </div>
@@ -235,6 +230,7 @@ const handleClearRoute = () => {
 .slide-in-leave-active {
   transition: all 0.25s ease;
 }
+
 .slide-in-enter-from,
 .slide-in-leave-to {
   opacity: 0;
@@ -243,14 +239,21 @@ const handleClearRoute = () => {
 
 /* ====== 平板端（≤1024px）====== */
 @media (max-width: 1024px) {
-  .top-controls :deep(.search-box) { width: 320px; }
+  .top-controls :deep(.search-box) {
+    width: 320px;
+  }
+
   .side-controls :deep(.location-btn),
   .side-controls :deep(.measure-btn),
-  .side-controls :deep(.route-btn) { padding: 10px 16px; font-size: 14px; }
+  .side-controls :deep(.route-btn) {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
 }
 
 /* ====== 手机端（≤768px）====== */
 @media (max-width: 768px) {
+
   /* 顶部搜索栏：全宽 + 安全区 */
   .top-controls {
     top: 12px;
@@ -287,7 +290,8 @@ const handleClearRoute = () => {
   .side-controls {
     top: auto;
     right: 12px;
-    bottom: 100px; /* 留出缩放控件(~70px) + 间距 */
+    bottom: 100px;
+    /* 留出缩放控件(~70px) + 间距 */
     flex-direction: column;
     gap: 10px;
     align-items: flex-end;
@@ -333,7 +337,9 @@ const handleClearRoute = () => {
     max-height: 50vh;
   }
 
-  .separator { margin: 0 6px; }
+  .separator {
+    margin: 0 6px;
+  }
 }
 
 /* ====== 小屏手机（≤480px）====== */

@@ -442,7 +442,7 @@ defineExpose({
     right: 0 !important;
     width: 100% !important;
     border-radius: 20px 20px 0 0;
-    box-shadow: 0 -4px 24px rgba(0,0,0,0.2);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
     max-height: 75vh;
     overflow-y: auto;
     z-index: 2000 !important;
